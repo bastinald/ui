@@ -2,6 +2,8 @@
 
 Laravel + Livewire + Bootstrap 5 UI starter kit.
 
+<a href="https://www.youtube.com/watch?v=6_4rNy7o3h4"><img src="https://i.imgur.com/TNejCR7.png"></a>
+
 ### Requirements
 
 - Laravel 8
