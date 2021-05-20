@@ -22,7 +22,7 @@
 
 <div class="form-floating mb-3">
     <select {{ $attributes }}>
-        <option>Select {{ $label }}</option>
+        <option value="">Select {{ $label }}</option>
 
         @foreach($options = Arr::isAssoc($options) ? $options : array_combine($options, $options) as $v => $l)
             <option value="{{ $v }}">{{ $l }}</option>
