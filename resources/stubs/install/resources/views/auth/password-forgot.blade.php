@@ -6,7 +6,7 @@
     @if($status)
         <p class="text-success mb-0">{{ $status }}</p>
     @else
-        <x-ui::input type="email" label="Email Address" model="email"/>
+        <x-ui::input type="email" label="Email Address" data="email"/>
 
         <x-ui::button action="send" label="Send Password Reset Link" block/>
     @endif

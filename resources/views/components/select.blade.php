@@ -1,17 +1,22 @@
 @props([
     'options' => [],
-    'model' => null,
+    'data' => null,
+    'lazy' => null,
+    'defer' => null,
     'label' => null,
 ])
 
 @php
+    if ($lazy) $bind = '.lazy';
+    else $bind = '.defer';
+
     $attributes = $attributes->class([
         'form-select',
-        'is-invalid' => $errors->has($model),
+        'is-invalid' => $errors->has($data),
     ])->merge([
-        'id' => $model,
+        'id' => $data,
         'placeholder' => $label,
-        'wire:model.defer' => 'data.' . $model,
+        'wire:model' . $bind => 'data.' . $data,
     ]);
 @endphp
 
@@ -24,11 +29,11 @@
         @endforeach
     </select>
 
-    <label for="{{ $model }}" class="form-label">
+    <label for="{{ $data }}" class="form-label">
         {{ $label }}
     </label>
 
-    @error($model)
+    @error($data)
         <div class="invalid-feedback">
             {{ $message }}
         </div>

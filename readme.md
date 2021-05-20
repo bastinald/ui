@@ -70,7 +70,7 @@ Once installation is complete, you can visit your app URL and login, register, e
 php artisan ui:migrate {--f} {--s} {--fs}
 ```
 
-This will run the automatic migrations by comparing the `migration` methods of your models to the current database table structures and applying any necessary changes. Use the `--f` option for fresh, `--s` for seed, and `--fs` for both.
+This will run the automatic migrations by comparing the `migration` methods of your models to the current database table structures and apply any necessary changes. Use the `--f` option for fresh, `--s` for seed, or `--fs` for both.
 
 ### Making Components
 
@@ -125,12 +125,14 @@ A button.
 ### Check
 
 ```html
-<x-ui::check label="Remember me" model="remember"/>
+<x-ui::check label="Remember me" data="remember"/>
 ```
 
 A checkbox input. Use `WithData` in your Livewire component for this.
 
-- `model` - the Livewire form data binding model
+- `data` - the Livewire data binding key
+- `lazy` - bind the data on change
+- `defer` - bind the data on action (default)
 - `label` - the label for the checkbox
 
 ### Dropdown
@@ -177,23 +179,27 @@ A dropdown item.
 ### Image
 
 ```html
-<x-ui::image label="Avatar" model="avatar"/>
+<x-ui::image label="Avatar" data="avatar"/>
 ```
 
 An image upload input. Use `WithData` and `WithFileUploads` in your Livewire component for this.
 
-- `model` - the Livewire form data binding model
+- `data` - the Livewire data binding key
 - `label` - the label for the input
 
 ### Input
 
 ```html
-<x-ui::input type="email" label="Email Address" model="email"/>
+<x-ui::input type="email" label="Email Address" data="email"/>
 ```
 
 An input field. Use `WithData` in your Livewire component for this.
 
-- `model` - the Livewire form data binding model
+- `data` - the Livewire data binding key
+- `instant` - bind the data on keyup
+- `lazy` - bind the data on change
+- `debounce` - bind the data on debounce (ms)
+- `defer` - bind the data on action (default)
 - `label` - the label for the input
 
 ### Link
@@ -241,39 +247,47 @@ A nav item button.
 ### Radio
 
 ```html
-<x-ui::radio :options="['Red', 'Green', 'Blue']" model="color"/>
-<x-ui::radio :options="['#ff0000' => 'Red', '#00ff00' => 'Green', '#0000ff' => 'Blue']" model="color"/>
-<x-ui::radio :options="App\Models\User::pluck('name', 'id')->toArray()" model="user_id"/>
+<x-ui::radio :options="['Red', 'Green', 'Blue']" data="color"/>
+<x-ui::radio :options="['#ff0000' => 'Red', '#00ff00' => 'Green', '#0000ff' => 'Blue']" data="color"/>
+<x-ui::radio :options="App\Models\User::pluck('name', 'id')->toArray()" data="user_id"/>
 ```
 
 A radio input. Use `WithData` in your Livewire component for this.
 
 - `options` - an array of radio options (`$value => $label`)
-- `model` - the Livewire form data binding model
+- `data` - the Livewire data binding key
+- `lazy` - bind the data on change
+- `defer` - bind the data on action (default)
 
 ### Select
 
 ```html
-<x-ui::select :options="['Red', 'Green', 'Blue']" label="Color" model="color"/>
-<x-ui::select :options="['#ff0000' => 'Red', '#00ff00' => 'Green', '#0000ff' => 'Blue']" label="Hex Color" model="hex_color"/>
-<x-ui::select :options="App\Models\User::pluck('name', 'id')->toArray()" label="User ID" model="user_id"/>
+<x-ui::select :options="['Red', 'Green', 'Blue']" label="Color" data="color"/>
+<x-ui::select :options="['#ff0000' => 'Red', '#00ff00' => 'Green', '#0000ff' => 'Blue']" label="Hex Color" data="hex_color"/>
+<x-ui::select :options="App\Models\User::pluck('name', 'id')->toArray()" label="User ID" data="user_id"/>
 ```
 
 A select input. Use `WithData` in your Livewire component for this.
 
 - `options` - an array of select options (`$value => $label`)
-- `model` - the Livewire form data binding model
+- `data` - the Livewire data binding key
+- `lazy` - bind the data on change
+- `defer` - bind the data on action (default)
 - `label` - the label for the select
 
 ### Textarea
 
 ```html
-<x-ui::textarea label="Biography" model="email"/>
+<x-ui::textarea label="Biography" data="email"/>
 ```
 
 An autosized textarea field. Use `WithData` in your Livewire component for this.
 
-- `model` - the Livewire form data binding model
+- `data` - the Livewire data binding key
+- `instant` - bind the data on keyup
+- `lazy` - bind the data on change
+- `debounce` - bind the data on debounce (ms)
+- `defer` - bind the data on action (default)
 - `label` - the label for the textarea
 
 ## Dynamic Modals
@@ -301,9 +315,9 @@ The `auth.password-change` view:
 <div>
     <h5>Change Password</h5>
 
-    <x-ui::input type="password" label="Current Password" model="current_password"/>
-    <x-ui::input type="password" label="New Password" model="password"/>
-    <x-ui::input type="password" label="Confirm New Password" model="password_confirmation"/>
+    <x-ui::input type="password" label="Current Password" data="current_password"/>
+    <x-ui::input type="password" label="New Password" data="password"/>
+    <x-ui::input type="password" label="Confirm New Password" data="password_confirmation"/>
 
     <div class="d-flex gap-3">
         <x-ui::button action="$emit('hideModal')" label="Cancel" color="secondary" block/>
@@ -399,7 +413,7 @@ public function login()
 }
 ```
 
-The `validateData` method validates current form data.
+The `validateData` method validates current data.
 
 #### Getting Data
 

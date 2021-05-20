@@ -3,9 +3,9 @@
 <x-ui::box col="5">
     <h5>@yield('title')</h5>
 
-    <x-ui::input type="email" label="Email Address" model="email"/>
-    <x-ui::input type="password" label="Password" model="password"/>
-    <x-ui::check label="Remember me" model="remember"/>
+    <x-ui::input type="email" label="Email Address" data="email"/>
+    <x-ui::input type="password" label="Password" data="password"/>
+    <x-ui::check label="Remember me" data="remember"/>
 
     <x-ui::button action="login" label="Login" block/>
 
