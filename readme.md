@@ -414,7 +414,7 @@ If `lazy` and `debounce` are not used, `defer` is the default.
 A textarea input:
 
 ```html
-<x-ui::textarea :label="__('Email')" rows="5" model="email"/>
+<x-ui::textarea :label="__('Biography')" rows="5" model="biography"/>
 ```
 
 Available props:
