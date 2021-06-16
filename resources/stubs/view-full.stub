@@ -1,7 +1,0 @@
-@section('title', 'DummyViewTitle')
-
-<div>
-    <h5>@yield('title')</h5>
-
-    <p>DummyViewWisdom</p>
-</div>

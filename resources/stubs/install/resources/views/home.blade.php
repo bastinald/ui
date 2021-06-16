@@ -1,7 +1,12 @@
-@section('title', 'Home')
+@section('title', __('Home'))
 
-<x-ui::box col="5">
-    <h5>@yield('title')</h5>
-
-    <p class="mb-0">You are logged in!</p>
-</x-ui::box>
+<div class="d-grid col-lg-5 mx-auto">
+    <div class="card">
+        <h5 class="card-header">
+            @yield('title')
+        </h5>
+        <div class="card-body">
+            {{ __('You are logged in!') }}
+        </div>
+    </div>
+</div>

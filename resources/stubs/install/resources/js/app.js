@@ -1,1 +1,2 @@
-require('../../vendor/bastinald/ui/resources/js/ui');
+require('@popperjs/core');
+window.bootstrap = require('bootstrap');

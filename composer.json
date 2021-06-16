@@ -1,7 +1,7 @@
 {
     "name": "bastinald/ui",
     "homepage": "https://github.com/bastinald/ui",
-    "description": "Laravel + Livewire + Bootstrap 5 UI starter kit.",
+    "description": "Laravel Livewire & Bootstrap 5 UI starter kit.",
     "license": "MIT",
     "authors": [
         {
@@ -11,22 +11,22 @@
         }
     ],
     "require": {
-        "doctrine/dbal": "^3.0",
-        "intervention/image": "^2.5",
-        "jamesmills/laravel-timezone": "^1.9",
-        "laravel/framework": "^8.0",
-        "livewire/livewire": "^2.0",
-        "lukeraymonddowning/honey": "^0.3"
+        "php": "^8.0",
+        "../../../vendor/barryvdh/laravel-ide-helper": "^2.10",
+        "../../../vendor/doctrine/dbal": "^3.0",
+        "../../../vendor/laravel/framework": "^8.0",
+        "../../../vendor/livewire/livewire": "^2.0",
+        "../../../vendor/lukeraymonddowning/honey": "^0.3"
     },
     "autoload": {
         "psr-4": {
-            "Bastinald\\UI\\": "src"
+            "Bastinald\\Ui\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Bastinald\\UI\\Providers\\UIProvider"
+                "Bastinald\\Ui\\Providers\\UiProvider"
             ]
         }
     }

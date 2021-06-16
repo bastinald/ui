@@ -1,18 +1,20 @@
-@section('title', 'Register')
+@section('title', __('Register'))
 
-<x-ui::box col="5">
-    <h5>@yield('title')</h5>
+<div class="d-grid col-lg-5 mx-auto">
+    <form class="card" wire:submit.prevent="register">
+        <h5 class="card-header">
+            @yield('title')
+        </h5>
+        <div class="card-body pb-0">
+            <x-ui::input :label="__('Name')" type="text" model="name"/>
+            <x-ui::input :label="__('Email')" type="email" model="email"/>
+            <x-ui::input :label="__('Password')" type="password" model="password"/>
+            <x-ui::input :label="__('Confirm Password')" type="password" model="password_confirmation"/>
 
-    <x-ui::input type="text" label="Username" data="name"/>
-    <x-ui::input type="email" label="Email Address" data="email"/>
-    <x-ui::input type="password" label="Password" data="password"/>
-    <x-ui::input type="password" label="Confirm Password" data="password_confirmation"/>
-
-    <x-honey recaptcha/>
-
-    <x-ui::button action="register" label="Register" block/>
-
-    <div class="d-flex flex-column align-items-center small mt-3">
-        <x-ui::link :href="route('login')" label="Login to account"/>
-    </div>
-</x-ui::box>
+            <x-honey/>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
+        </div>
+    </form>
+</div>

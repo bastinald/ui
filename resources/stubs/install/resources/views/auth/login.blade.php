@@ -1,16 +1,24 @@
-@section('title', 'Login')
+@section('title', __('Login'))
 
-<x-ui::box col="5">
-    <h5>@yield('title')</h5>
+<div class="d-grid col-lg-5 mx-auto">
+    <form class="card" wire:submit.prevent="login">
+        <h5 class="card-header">
+            @yield('title')
+        </h5>
+        <div class="card-body pb-0">
+            <x-ui::input :label="__('Email')" type="email" model="email"/>
+            <x-ui::input :label="__('Password')" type="password" model="password"/>
 
-    <x-ui::input type="email" label="Email Address" data="email"/>
-    <x-ui::input type="password" label="Password" data="password"/>
-    <x-ui::check label="Remember me" data="remember"/>
+            <div class="d-flex justify-content-between">
+                <x-ui::checkbox :label="__('Remember me')" model="remember"/>
 
-    <x-ui::button action="login" label="Login" block/>
-
-    <div class="d-flex flex-column align-items-center small mt-3">
-        <x-ui::link :href="route('register')" label="Register an account"/>
-        <x-ui::link :href="route('password.forgot')" label="Forgot password"/>
-    </div>
-</x-ui::box>
+                @if(Route::has('password.forgot'))
+                    <a href="{{ route('password.forgot') }}">{{ __('Forgot password?') }}</a>
+                @endif
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
+        </div>
+    </form>
+</div>

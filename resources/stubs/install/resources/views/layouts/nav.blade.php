@@ -1,23 +1,46 @@
-<nav class="navbar navbar-expand navbar-light sticky-top bg-white shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a href="{{ url('/') }}" class="navbar-brand">
-            <img src="{{ asset('images/logo.png') }}?v={{ config('app.version') }}" alt="{{ config('app.name') }}">
-        </a>
+        <a href="{{ url('/') }}" class="navbar-brand">{{ config('app.name') }}</a>
+
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div id="nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
+            <div class="navbar-nav ms-auto">
                 @guest
-                    <x-ui::nav-item :href="route('login')" icon="sign-in-alt"/>
-                    <x-ui::nav-item :href="route('register')" icon="user-plus"/>
+                    @if(Route::has('login'))
+                        <a href="{{ route('login') }}" class="nav-link">{{ __('Login') }}</a>
+                    @endif
+
+                    @if(Route::has('register'))
+                        <a href="{{ route('register') }}" class="nav-link">{{ __('Register') }}</a>
+                    @endif
                 @else
-                    <x-ui::nav-item :href="url('home')" icon="home"/>
-                    <x-ui::nav-dropdown icon="user">
-                        <x-ui::dropdown-item action="$emit('showModal', 'auth.profile-edit')" label="Edit Profile"/>
-                        <x-ui::dropdown-item action="$emit('showModal', 'auth.password-change')" label="Change Password"/>
-                        <x-ui::dropdown-item :href="route('logout')" label="Logout"/>
-                    </x-ui::nav-dropdown>
+                    <a href="{{ url('/home') }}" class="nav-link">{{ __('Home') }}</a>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <button type="button" class="dropdown-item"
+                                    wire:click="$emit('showModal', 'auth.profile-update')">
+                                {{ __('Update Profile') }}
+                            </button>
+
+                            <button type="button" class="dropdown-item"
+                                    wire:click="$emit('showModal', 'auth.password-change')">
+                                {{ __('Change Password') }}
+                            </button>
+
+                            <button type="button" class="dropdown-item" wire:click="logout">
+                                {{ __('Logout') }}
+                            </button>
+                        </div>
+                    </div>
                 @endguest
-            </ul>
+            </div>
         </div>
     </div>
 </nav>

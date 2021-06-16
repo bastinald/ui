@@ -1,8 +1,8 @@
 <?php
 
-namespace Bastinald\UI\Commands;
+namespace Bastinald\Ui\Commands;
 
-use Bastinald\UI\Traits\MakesStubs;
+use Bastinald\Ui\Traits\MakesStubs;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Livewire\Commands\ComponentParser;
@@ -11,36 +11,66 @@ class ComponentCommand extends Command
 {
     use MakesStubs;
 
-    protected $signature = 'ui:component {class} {--f}';
+    public $componentParser;
+
+    protected $signature = 'ui:component {class} {--f|--full} {--m|--modal} {--force}';
 
     public function handle()
     {
-        $componentParser = new ComponentParser(
+        $this->setParser();
+
+        if (file_exists($this->componentParser->classPath()) && !$this->option('force')) {
+            $this->warn('Component already exists, use the <info>--force</info> to overwrite it!');
+
+            return;
+        }
+
+        $this->setStubReplaces();
+        $this->makeStubs();
+
+        $this->info('Component & view made!');
+    }
+
+    public function setParser()
+    {
+        $this->componentParser = new ComponentParser(
             config('livewire.class_namespace'),
-            config('livewire.view_path'),
+            resource_path('views'),
             $this->argument('class')
         );
+    }
 
-        $replaces = [
-            'DummyComponentNamespace' => $componentParser->classNamespace(),
-            'DummyComponentClass' => $componentParser->className(),
-            'DummyViewPath' => Str::replace('.', '/', $componentParser->viewName()),
-            'DummyViewName' => $componentParser->viewName(),
-            'DummyViewTitle' => preg_replace('/(.)(?=[A-Z])/u', '$1 ', $componentParser->className()),
-            'DummyViewWisdom' => $componentParser->wisdomOfTheTao(),
+    public function setStubReplaces()
+    {
+        $this->stubReplaces = [
+            'DummyComponentNamespace' => $this->componentParser->classNamespace(),
+            'DummyComponentClass' => $this->componentParser->className(),
+            'DummyRouteUri' => Str::replace('.', '/', $this->componentParser->viewName()),
+            'DummyRouteName' => $this->componentParser->viewName(),
+            'DummyViewName' => $this->componentParser->viewName(),
+            'DummyViewTitle' => preg_replace('/(.)(?=[A-Z])/u', '$1 ', $this->componentParser->className()),
+            'DummyWisdomOfTheTao' => $this->componentParser->wisdomOfTheTao(),
         ];
+    }
+
+    public function makeStubs()
+    {
+        if ($this->option('full')) {
+            $type = 'Full';
+        } else if ($this->option('modal')) {
+            $type = 'Modal';
+        } else {
+            $type = 'Partial';
+        }
 
         $this->makeStub(
-            $componentParser->classPath(),
-            'component-' . ($this->option('f') ? 'full' : 'partial') . '.stub',
-            $replaces
-        );
-        $this->makeStub(
-            $componentParser->viewPath(),
-            'view-' . ($this->option('f') ? 'full' : 'partial') . '.stub',
-            $replaces
+            $this->componentParser->classPath(),
+            'DummyComponent' . $type . 'Class.php'
         );
 
-        $this->info('Component & view created!');
+        $this->makeStub(
+            $this->componentParser->viewPath(),
+            'DummyComponent' . $type . '.blade.php'
+        );
     }
 }

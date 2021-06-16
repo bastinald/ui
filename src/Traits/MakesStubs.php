@@ -1,17 +1,19 @@
 <?php
 
-namespace Bastinald\UI\Traits;
+namespace Bastinald\Ui\Traits;
 
 use Illuminate\Filesystem\Filesystem;
 
 trait MakesStubs
 {
-    public function makeStub($path, $stub, $replaces)
+    public $stubReplaces = [];
+
+    public function makeStub($path, $stub)
     {
         $filesystem = new Filesystem;
-        $contents = $filesystem->get(__DIR__ . '/../../resources/stubs/' . $stub);
+        $contents = $filesystem->get(__DIR__ . '/../../resources/stubs/make/' . $stub);
 
-        foreach ($replaces as $search => $replace) {
+        foreach ($this->stubReplaces as $search => $replace) {
             $contents = str_replace($search, $replace, $contents);
         }
 

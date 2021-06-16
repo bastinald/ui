@@ -1,31 +1,27 @@
 @props([
-    'label' => null,
+    'label',
     'model',
     'lazy' => false,
-    'debounce' => false,
 ])
 
 @php
     if ($lazy) $bind = '.lazy';
-    else if (ctype_digit($debounce)) $bind = '.debounce.' . $debounce . 'ms';
-    else if ($debounce) $bind = '';
     else $bind = '.defer';
 
     $attributes = $attributes->class([
-        'form-control',
+        'form-check-input',
         'is-invalid' => $errors->has($model),
     ])->merge([
+        'type' => 'checkbox',
         'id' => $model,
         'wire:model' . $bind => 'model.' . $model,
     ]);
 @endphp
 
-<div class="mb-3">
-    @if($label)
-        <label for="{{ $model }}" class="form-label">{{ $label }}</label>
-    @endif
+<div class="form-check mb-3">
+    <input {{ $attributes }}>
 
-    <textarea {{ $attributes }}></textarea>
+    <label for="{{ $model }}" class="form-check-label">{{ $label }}</label>
 
     @error($model)
         <div class="invalid-feedback">{{ $message }}</div>

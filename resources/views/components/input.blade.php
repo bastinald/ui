@@ -1,40 +1,40 @@
 @props([
-    'data' => null,
-    'instant' => null,
-    'lazy' => null,
-    'debounce' => null,
-    'defer' => null,
     'label' => null,
+    'type',
+    'model',
+    'lazy' => false,
+    'debounce' => false,
 ])
 
 @php
-    if ($instant) $bind = '';
-    else if ($lazy) $bind = '.lazy';
-    else if ($debounce) $bind = '.debounce.' . $debounce . 'ms';
+    if ($type == 'number') $inputmode = 'decimal';
+    else if (in_array($type, ['tel', 'search', 'email', 'url'])) $inputmode = $type;
+    else $inputmode = 'text';
+
+    if ($lazy) $bind = '.lazy';
+    else if (ctype_digit($debounce)) $bind = '.debounce.' . $debounce . 'ms';
+    else if ($debounce) $bind = '';
     else $bind = '.defer';
 
     $attributes = $attributes->class([
         'form-control',
-        'is-invalid' => $errors->has($data),
+        'is-invalid' => $errors->has($model),
     ])->merge([
-        'type' => $type = $attributes->get('type', 'text'),
-        'inputmode' => $type == 'number' ? 'numeric' : $type,
-        'id' => $data,
-        'placeholder' => $label,
-        'wire:model' . $bind => 'data.' . $data,
+        'type' => $type,
+        'inputmode' => $inputmode,
+        'id' => $model,
+        'wire:model' . $bind => 'model.' . $model,
     ]);
 @endphp
 
-<div class="form-floating mb-3">
+<div class="mb-3">
+    @if($label)
+        <label for="{{ $model }}" class="form-label">{{ $label }}</label>
+    @endif
+
     <input {{ $attributes }}>
 
-    <label for="{{ $data }}" class="form-label">
-        {{ $label }}
-    </label>
-
-    @error($data)
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
+    @error($model)
+        <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>

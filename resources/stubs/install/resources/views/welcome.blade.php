@@ -1,7 +1,12 @@
-@section('title', 'Welcome')
+@section('title', __('Welcome'))
 
-<x-ui::box col="5">
-    <h5>@yield('title')</h5>
-
-    <p class="mb-0">Welcome to {{ config('app.name') }}!</p>
-</x-ui::box>
+<div class="d-grid col-lg-5 mx-auto">
+    <div class="card">
+        <h5 class="card-header">
+            @yield('title')
+        </h5>
+        <div class="card-body">
+            {{ __('Welcome to the app!') }}
+        </div>
+    </div>
+</div>

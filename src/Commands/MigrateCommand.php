@@ -1,6 +1,6 @@
 <?php
 
-namespace Bastinald\UI\Commands;
+namespace Bastinald\Ui\Commands;
 
 use Illuminate\Console\Command;
 use Doctrine\DBAL\Schema\Comparator;
@@ -12,32 +12,42 @@ use Symfony\Component\Finder\Finder;
 
 class MigrateCommand extends Command
 {
-    protected $signature = 'ui:migrate {--f} {--s} {--fs}';
+    protected $signature = 'ui:migrate {--f|--fresh} {--s|--seed} {--force}';
 
     public function handle()
     {
-        $this->handleTraditionalMigrations();
-        $this->handleAutomaticMigrations();
+        if (app()->environment('production') && !$this->option('force')) {
+            $this->warn('You must use the <info>--force</info> to migrate in production!');
 
-        if ($this->option('s') || $this->option('fs')) {
+            return;
+        }
+
+        $this->runTraditionalMigrations();
+        $this->runAutomaticMigrations();
+
+        if ($this->option('seed')) {
             $this->seed();
         }
     }
 
-    public function handleTraditionalMigrations()
+    public function runTraditionalMigrations()
     {
         $command = 'migrate';
 
-        if ($this->option('f') || $this->option('fs')) {
+        if ($this->option('fresh')) {
             $command .= ':fresh';
         }
 
-        Artisan::call($command . ' --force');
+        if ($this->option('force')) {
+            $command .= ' --force';
+        }
+
+        Artisan::call($command);
     }
 
-    public function handleAutomaticMigrations()
+    public function runAutomaticMigrations()
     {
-        $path = is_dir(app_path('Models')) ? app_path('Models') : app_path();
+        $path = app_path('Models');
         $namespace = app()->getNamespace();
 
         foreach ((new Finder)->in($path) as $model) {
@@ -87,7 +97,11 @@ class MigrateCommand extends Command
 
     public function seed()
     {
-        $command = 'db:seed --force';
+        $command = 'db:seed';
+
+        if ($this->option('force')) {
+            $command .= ' --force';
+        }
 
         Artisan::call($command);
 

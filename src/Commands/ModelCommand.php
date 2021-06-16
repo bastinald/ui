@@ -1,8 +1,8 @@
 <?php
 
-namespace Bastinald\UI\Commands;
+namespace Bastinald\Ui\Commands;
 
-use Bastinald\UI\Traits\MakesStubs;
+use Bastinald\Ui\Traits\MakesStubs;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Livewire\Commands\ComponentParser;
@@ -11,39 +11,62 @@ class ModelCommand extends Command
 {
     use MakesStubs;
 
-    protected $signature = 'ui:model {class}';
+    public $modelParser;
+    public $factoryParser;
+
+    protected $signature = 'ui:model {class} {--force}';
 
     public function handle()
     {
-        $modelParser = new ComponentParser(
+        $this->setParsers();
+
+        if (file_exists($this->modelParser->classPath()) && !$this->option('force')) {
+            $this->warn('Model already exists, use the <info>--force</info> to overwrite it!');
+
+            return;
+        }
+
+        $this->setStubReplaces();
+        $this->makeStubs();
+
+        $this->info('Model & factory made!');
+    }
+
+    public function setParsers()
+    {
+        $this->modelParser = new ComponentParser(
             'App\\Models',
-            config('livewire.view_path'),
+            resource_path('views'),
             $this->argument('class')
         );
-        $factoryParser = new ComponentParser(
+
+        $this->factoryParser = new ComponentParser(
             'Database\\Factories',
-            config('livewire.view_path'),
+            resource_path('views'),
             $this->argument('class') . 'Factory'
         );
+    }
 
-        $replaces = [
-            'DummyModelNamespace' => $modelParser->classNamespace(),
-            'DummyModelClass' => $modelParser->className(),
-            'DummyFactoryNamespace' => $factoryParser->classNamespace(),
-            'DummyFactoryClass' => $factoryParser->className(),
+    public function setStubReplaces()
+    {
+        $this->stubReplaces = [
+            'DummyModelNamespace' => $this->modelParser->classNamespace(),
+            'DummyModelClass' => $this->modelParser->className(),
+            'DummyFactoryNamespace' => $this->factoryParser->classNamespace(),
+            'DummyFactoryClass' => $this->factoryParser->className(),
         ];
+    }
 
+    public function makeStubs()
+    {
         $this->makeStub(
-            $modelParser->classPath(),
-            'model.stub',
-            $replaces
-        );
-        $this->makeStub(
-            Str::replaceFirst('app/', '', $factoryParser->classPath()),
-            'factory.stub',
-            $replaces
+            $this->modelParser->classPath(),
+            'DummyModelClass.php'
         );
 
-        $this->info('Model & factory created!');
+        $this->makeStub(
+            Str::replaceFirst('app/', '', $this->factoryParser->classPath()),
+            'DummyFactoryClass.php'
+        );
     }
 }

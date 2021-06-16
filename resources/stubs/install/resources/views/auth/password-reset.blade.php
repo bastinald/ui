@@ -1,11 +1,17 @@
-@section('title', 'Reset Password')
+@section('title', __('Reset Password'))
 
-<x-ui::box col="5">
-    <h5>@yield('title')</h5>
-
-    <x-ui::input type="email" label="Email Address" data="email"/>
-    <x-ui::input type="password" label="New Password" data="password"/>
-    <x-ui::input type="password" label="Confirm New Password" data="password_confirmation"/>
-
-    <x-ui::button action="save" label="Save" block/>
-</x-ui::box>
+<div class="d-grid col-lg-5 mx-auto">
+    <form class="card" wire:submit.prevent="resetPassword">
+        <h5 class="card-header">
+            @yield('title')
+        </h5>
+        <div class="card-body pb-0">
+            <x-ui::input :label="__('Email')" type="email" model="email"/>
+            <x-ui::input :label="__('New Password')" type="password" model="password"/>
+            <x-ui::input :label="__('New Confirm Password')" type="password" model="password_confirmation"/>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">{{ __('Reset Password') }}</button>
+        </div>
+    </form>
+</div>

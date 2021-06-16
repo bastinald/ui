@@ -1,13 +1,19 @@
-@section('title', 'Forgot Password')
+@section('title', __('Forgot Password'))
 
-<x-ui::box col="5">
-    <h5>@yield('title')</h5>
+<div class="d-grid col-lg-5 mx-auto">
+    <form class="card" wire:submit.prevent="send">
+        <h5 class="card-header">
+            @yield('title')
+        </h5>
+        <div class="card-body pb-0">
+            @if($status)
+                <div class="alert alert-success">{{ $status }}</div>
+            @endif
 
-    @if($status)
-        <p class="text-success mb-0">{{ $status }}</p>
-    @else
-        <x-ui::input type="email" label="Email Address" data="email"/>
-
-        <x-ui::button action="send" label="Send Password Reset Link" block/>
-    @endif
-</x-ui::box>
+            <x-ui::input :label="__('Email')" type="email" model="email"/>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">{{ __('Send Password Reset Link') }}</button>
+        </div>
+    </form>
+</div>
