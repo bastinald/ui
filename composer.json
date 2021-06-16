@@ -12,11 +12,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "../../../vendor/barryvdh/laravel-ide-helper": "^2.10",
-        "../../../vendor/doctrine/dbal": "^3.0",
-        "../../../vendor/laravel/framework": "^8.0",
-        "../../../vendor/livewire/livewire": "^2.0",
-        "../../../vendor/lukeraymonddowning/honey": "^0.3"
+        "barryvdh/laravel-ide-helper": "^2.10",
+        "doctrine/dbal": "^3.0",
+        "laravel/framework": "^8.0",
+        "livewire/livewire": "^2.0",
+        "lukeraymonddowning/honey": "^0.3"
     },
     "autoload": {
         "psr-4": {
