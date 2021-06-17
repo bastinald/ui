@@ -19,7 +19,7 @@ Laravel Livewire & Bootstrap 5 UI & CRUD starter kit. This package is a moderniz
 - Automatic attribute hashing
 - Easy form data manipulation via a single property
 - Dynamic Livewire Bootstrap modals
-- Simple Blade form input components
+- Custom Blade components
 - Font Awesome icons
 - & more
 
@@ -32,7 +32,7 @@ Laravel Livewire & Bootstrap 5 UI & CRUD starter kit. This package is a moderniz
 - [Automatic Attribute Hashing](#automatic-attribute-hashing)
 - [Form Data Manipulation](#form-data-manipulation)
 - [Dynamic Bootstrap Modals](#dynamic-bootstrap-modals)
-- [Blade Input Components](#blade-input-components)
+- [Blade Components](#blade-components)
 - [Font Awesome Icons](#font-awesome-icons)
 - [Publishing Assets](#publishing-assets)
 
@@ -414,9 +414,9 @@ You can also hide the modal through regular Bootstrap `data-bs-toggle` buttons:
 </button>
 ```
 
-## Blade Input Components
+## Blade Components
 
-This package comes with some handy form input components, ensuring that you stay DRY, while keeping your form markup nice and neat.
+This package comes with some handy Blade components, ensuring that you stay DRY, while keeping your markup nice and neat.
 
 ### Input
 
