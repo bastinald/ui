@@ -42,7 +42,7 @@ This package was designed to work with fresh Laravel projects.
 
 Install Laravel via Valet, Docker, or whatever you prefer:
 
-```console
+```bash
 laravel new my-project
 ```
 
@@ -56,13 +56,13 @@ MAIL_*
 
 Require this package via composer:
 
-```console
+```bash
 composer require bastinald/ui
 ```
 
 Run the `ui:install` command:
 
-```console
+```bash
 php artisan ui:install
 ```
 
@@ -72,7 +72,7 @@ Once the installation is complete, you should be able to visit your app URL and 
 
 ### Installing UI
 
-```console
+```bash
 php artisan ui:install
 ```
 
@@ -80,7 +80,7 @@ This command will create your Livewire auth components & views, update your User
 
 ### Making Models
 
-```console
+```bash
 php artisan ui:model {class} {--force}
 ```
 
@@ -90,7 +90,7 @@ Use the `--force` to overwrite existing models & factories.
 
 ### Making Components
 
-```console
+```bash
 php artisan ui:component {class} {--f|--full} {--m|--modal} {--force}
 ```
 
@@ -100,7 +100,7 @@ Use the `--force` to overwrite existing components & views.
 
 ### Making CRUD
 
-```console
+```bash
 php artisan ui:crud {path}
 ```
 
@@ -108,7 +108,7 @@ This will make CRUD components & views for a given component path/namespace. Thi
 
 For making CRUD inside of subfolders, simply use slashes or dot notation:
 
-```console
+```bash
 # no subfolder
 php artisan ui:crud Users 
 
@@ -122,7 +122,7 @@ Use the `--force` to overwrite existing CRUD components & views.
 
 ### Running Automatic Migrations
 
-```console
+```bash
 php artisan ui:migrate {--f|--fresh} {--s|--seed} {--force}
 ```
 
@@ -160,7 +160,7 @@ class User extends Model
 
 Or, make a new model via the `ui:model` command, which will include a `migration` method for you:
 
-```console
+```bash
 php artisan ui:model Vehicle
 ```
 
@@ -189,7 +189,7 @@ class Home extends Component
 
 Or, just run the `ui:component` command with the `-f` option to quickly make a full page component including a `route` method:
 
-```console
+```bash
 php artisan ui:component ContactUs -f
 ```
 
@@ -333,7 +333,7 @@ This package allows you to show Livewire components as modals dynamically by emi
 
 Just use the `ui:component` command with the `-m` option to make a new modal component:
 
-```console
+```bash
 php artisan ui:component TermsOfService -m
 ```
 
@@ -585,7 +585,7 @@ For information on how to configure this token, [please see the Font Awesome doc
 
 Publish the package config, stubs, and views via the `vendor:publish` command:
 
-```console
+```bash
 php artisan vendor:publish
 ```
 
