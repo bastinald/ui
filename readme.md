@@ -20,6 +20,7 @@ Laravel Livewire & Bootstrap 5 UI starter kit. This package is a modernized vers
 - Easy form data manipulation via a single property
 - Dynamic Livewire Bootstrap modals
 - Simple Blade form input components
+- Font Awesome icons
 - & more
 
 ### Documentation
@@ -32,6 +33,8 @@ Laravel Livewire & Bootstrap 5 UI starter kit. This package is a modernized vers
 - [Form Data Manipulation](#form-data-manipulation)
 - [Dynamic Bootstrap Modals](#dynamic-bootstrap-modals)
 - [Blade Input Components](#blade-input-components)
+- [Font Awesome Icons](#font-awesome-icons)
+- [Publishing Assets](#publishing-assets)
 
 ## Installation
 
@@ -475,3 +478,44 @@ Available props:
 - `label`: the checkbox label
 - `model`: the key for the component `$model` property
 - `lazy`: bind the model value on change
+
+### Icon
+
+A Font Awesome icon:
+
+```html
+<x-ui::icon name="laravel" style="brands"/>
+```
+
+Available props:
+
+- `name`: the icon name
+- `style`: the icon style e.g. `solid`, `regular` (default set in config)
+
+## Font Awesome Icons
+
+When running the `ui:install` command, you are given the option to install Font Awesome free or pro. If you select pro, you are required to have a global NPM token configured.
+
+For information on how to configure this token, [please see the Font Awesome documentation](https://fontawesome.com/v5.15/how-to-use/on-the-web/setup/using-package-managers#installing-pro).
+
+## Publishing Assets
+
+Publish the package config, stubs, and views via the `vendor:publish` command:
+
+```console
+php artisan vendor:publish
+```
+
+Select `ui:config`, `ui:stubs`, `ui:views`, or `ui` for all assets.
+
+### Using Custom Stubs
+
+Once you have published the package config and stub files, the stubs will be located in the `resources/stubs/vendor/ui` folder.
+
+Update the `config/ui.php` file and point the `stub_path` to this path:
+
+```php
+'stub_path' => resource_path('stubs/vendor/ui'),
+```
+
+The commands will now use this path for the stubs. Customize them to your needs.

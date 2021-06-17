@@ -26,6 +26,24 @@ class UiProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'ui');
 
+        $this->publishes([
+            __DIR__ . '/../../config/ui.php' => config_path('ui.php'),
+        ], ['ui', 'ui:config']);
+
+        $this->publishes([
+            __DIR__ . '/../../resources/stubs/crud' => resource_path('stubs/vendor/ui/crud'),
+            __DIR__ . '/../../resources/stubs/make' => resource_path('stubs/vendor/ui/make'),
+        ], ['ui', 'ui:stubs']);
+
+        $this->publishes([
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/ui'),
+        ], ['ui', 'ui:views']);
+
         Livewire::component('modal', ModalComponent::class);
+    }
+
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../../config/ui.php', 'ui');
     }
 }

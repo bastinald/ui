@@ -61,12 +61,12 @@ class ModelCommand extends Command
     {
         $this->makeStub(
             $this->modelParser->classPath(),
-            'DummyModelClass.php'
+            config('ui.stub_path') . '/make/DummyModelClass.php'
         );
 
         $this->makeStub(
             Str::replaceFirst('app/', '', $this->factoryParser->classPath()),
-            'DummyFactoryClass.php'
+            config('ui.stub_path') . '/make/DummyFactoryClass.php'
         );
     }
 }

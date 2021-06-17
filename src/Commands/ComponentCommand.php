@@ -65,12 +65,12 @@ class ComponentCommand extends Command
 
         $this->makeStub(
             $this->componentParser->classPath(),
-            'DummyComponent' . $type . 'Class.php'
+            config('ui.stub_path') . '/make/DummyComponent' . $type . 'Class.php'
         );
 
         $this->makeStub(
             $this->componentParser->viewPath(),
-            'DummyComponent' . $type . '.blade.php'
+            config('ui.stub_path') . '/make/DummyComponent' . $type . '.blade.php'
         );
     }
 }

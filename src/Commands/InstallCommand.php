@@ -17,10 +17,37 @@ class InstallCommand extends Command
         $this->filesystem = new Filesystem;
         $this->filesystem->copyDirectory(__DIR__ . '/../../resources/stubs/install', base_path());
 
+        $this->determineIconVersion();
         $this->deleteUserMigration();
         $this->runCommands();
 
         $this->info('UI installed! ' . config('app.url'));
+    }
+
+    public function determineIconVersion()
+    {
+        $version = $this->choice(
+            'Which version of Font Awesome?',
+            ['Free', 'Pro (requires global NPM token config)']
+        );
+
+        if ($version != 'Free') {
+            Artisan::call('vendor:publish --tag=ui:config', [], $this->getOutput());
+
+            $files = [base_path('package.json'), config_path('ui.php'), resource_path('scss/app.scss')];
+
+            foreach ($files as $file) {
+                $contents = $this->filesystem->get($file);
+
+                $contents = str_replace(
+                    ['@fortawesome/fontawesome-free', "'font_awesome_style' => 'solid'"],
+                    ['@fortawesome/fontawesome-pro', "'font_awesome_style' => 'regular'"],
+                    $contents
+                );
+
+                $this->filesystem->put($file, $contents);
+            }
+        }
     }
 
     public function deleteUserMigration()

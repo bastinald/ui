@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a href="{{ url('/') }}" class="navbar-brand">{{ config('app.name') }}</a>
+        <a href="{{ url('/') }}" class="navbar-brand">
+            <x-ui::icon name="laravel" style="brands" class="text-primary"/>
+            {{ config('app.name', 'Laravel') }}
+        </a>
 
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
