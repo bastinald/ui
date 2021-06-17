@@ -109,10 +109,10 @@ This will make CRUD components & views for a given component path/namespace. Thi
 For making CRUD inside of subfolders, simply use slashes or dot notation:
 
 ```console
-// no subfolder
+# no subfolder
 php artisan ui:crud Users 
 
-// in an "Admin" subfolder
+# in an "Admin" subfolder
 php artisan ui:crud Admin/Users 
 ```
 
