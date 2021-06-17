@@ -1,6 +1,6 @@
 # bastinald/ui
 
-Laravel Livewire & Bootstrap 5 UI starter kit. This package is a modernized version of the old `laravel/ui` package for developers who prefer using Bootstrap 5 and full page Livewire components to build their projects. It also comes with a few features to boost your development speed even more.
+Laravel Livewire & Bootstrap 5 UI & CRUD starter kit. This package is a modernized version of the old `laravel/ui` package for developers who prefer using Bootstrap 5 and full page Livewire components to build their projects. It also comes with a few features to boost your development speed even more.
 
 <a href="https://www.youtube.com/watch?v=CYl1pMgiecU"><img src="https://i.imgur.com/jkp9nYW.png"></a>
 
@@ -13,7 +13,7 @@ Laravel Livewire & Bootstrap 5 UI starter kit. This package is a modernized vers
 
 - Bootstrap 5 pre-configured
 - Full auth scaffolding including login, register, forgot password, profile updating, etc.
-- Commands for making models and components
+- Commands for making models, components, and CRUD
 - Automatic model migrations
 - Automatic full page component routing
 - Automatic attribute hashing
@@ -97,6 +97,28 @@ php artisan ui:component {class} {--f|--full} {--m|--modal} {--force}
 This will make a Livewire component and view depending on which option you pass to it. Use the `-f` option to create a full page component with a `route` method, the `-m` option to create a modal component, or neither to create a partial component.
 
 Use the `--force` to overwrite existing components & views.
+
+### Making CRUD
+
+```console
+php artisan ui:crud {path}
+```
+
+This will make CRUD components & views for a given component path/namespace. This includes an index, create, read, update, and delete. It also comes with searching, sorting, and filtering, which is easily customizable inside the index component class.
+
+For making CRUD inside of subfolders, simply use slashes or dot notation:
+
+```console
+# no subfolder
+php artisan ui:crud Users 
+
+# in an "Admin" subfolder
+php artisan ui:crud Admin/Users 
+```
+
+If the model (e.g. `User` in the example above) does not already exist when making CRUD, it will ask if you want to make it. After generating CRUD, all you need to do is add your model fields to the component views. Check out the `Users` component & views that come with the package when you run `ui:install` for an example.
+
+Use the `--force` to overwrite existing CRUD components & views.
 
 ### Running Automatic Migrations
 
@@ -478,6 +500,67 @@ Available props:
 - `label`: the checkbox label
 - `model`: the key for the component `$model` property
 - `lazy`: bind the model value on change
+
+### Dropdown
+
+A dropdown button:
+
+```html
+<x-ui::dropdown icon="filter" :label="__($filter)">
+    @foreach($filters as $filter)
+        <x-ui::dropdown-item :label="__($filter)" click="$set('filter', '{{ $filter }}')"/>
+    @endforeach
+</x-ui::dropdown>
+```
+
+Available props:
+
+- `icon`: the dropdown button icon (Font Awesome)
+- `label`: the dropdown button label
+- `position`: the dropdown menu position (defaults to `end`)
+- `slot`: the dropdown items
+
+### Dropdown Item
+
+A dropdown item button:
+
+```html
+<x-ui::dropdown-item :label="__('Logout')" click="logout"/>
+```
+
+Available props:
+
+- `label`: the dropdown item button label
+- `click`: the Livewire click action
+
+### Action
+
+A CRUD action button:
+
+```html
+<x-ui::action icon="eye" :title="__('Read')"
+    click="$emit('showModal', 'users.read', {{ $user->id }})"/>
+```
+
+Available props:
+
+- `icon`: the action button icon (Font Awesome)
+- `title`: the action button title
+- `click`: the Livewire click action
+
+### Pagination
+
+Responsive pagination links:
+
+```html
+<x-ui::pagination :links="$users"/>
+```
+
+Available props:
+
+- `links`: the pagination link results
+- `count`: show the count to the left (`true` or `false`)
+- `justify`: the justification for the links
 
 ### Icon
 

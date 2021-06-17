@@ -5,8 +5,7 @@
 
 @php
     $attributes = $attributes->class([
-        'fa' . Str::limit($style, 1, null),
-        'fa-' . $name,
+        'fa' . Str::limit($style, 1, null) . ' fa-' . $name,
     ])->merge([
         //
     ]);

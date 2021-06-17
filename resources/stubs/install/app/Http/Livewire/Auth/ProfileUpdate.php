@@ -25,7 +25,7 @@ class ProfileUpdate extends Component
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('users')->ignoreModel(Auth::user())],
+            'email' => ['required', 'email', Rule::unique('users')->ignore(Auth::user()->id)],
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace Bastinald\Ui\Providers;
 
 use Bastinald\Ui\Commands\ComponentCommand;
+use Bastinald\Ui\Commands\CrudCommand;
 use Bastinald\Ui\Commands\InstallCommand;
 use Bastinald\Ui\Commands\MigrateCommand;
 use Bastinald\Ui\Commands\ModelCommand;
@@ -17,6 +18,7 @@ class UiProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ComponentCommand::class,
+                CrudCommand::class,
                 InstallCommand::class,
                 MigrateCommand::class,
                 ModelCommand::class,

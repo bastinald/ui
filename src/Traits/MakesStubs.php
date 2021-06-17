@@ -11,7 +11,7 @@ trait MakesStubs
     public function makeStub($path, $stub)
     {
         $filesystem = new Filesystem;
-        $contents = $filesystem->get($stub);
+        $contents = $filesystem->get(config('ui.stub_path') . $stub);
 
         foreach ($this->stubReplaces as $search => $replace) {
             $contents = str_replace($search, $replace, $contents);

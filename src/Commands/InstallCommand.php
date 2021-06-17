@@ -32,17 +32,15 @@ class InstallCommand extends Command
         );
 
         if ($version != 'Free') {
-            Artisan::call('vendor:publish --tag=ui:config', [], $this->getOutput());
+            Artisan::call('vendor:publish --tag=ui:config');
 
             $files = [base_path('package.json'), config_path('ui.php'), resource_path('scss/app.scss')];
 
             foreach ($files as $file) {
-                $contents = $this->filesystem->get($file);
-
                 $contents = str_replace(
                     ['@fortawesome/fontawesome-free', "'font_awesome_style' => 'solid'"],
                     ['@fortawesome/fontawesome-pro', "'font_awesome_style' => 'regular'"],
-                    $contents
+                    $this->filesystem->get($file)
                 );
 
                 $this->filesystem->put($file, $contents);
@@ -64,7 +62,7 @@ class InstallCommand extends Command
         exec('npm install');
         exec('npm run dev');
 
-        Artisan::call('ide-helper:generate', [], $this->getOutput());
-        Artisan::call('ui:migrate -fs', [], $this->getOutput());
+        Artisan::call('ide-helper:generate');
+        Artisan::call('ui:migrate -fs');
     }
 }

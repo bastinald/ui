@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a href="{{ url('/') }}" class="navbar-brand">
-            <x-ui::icon name="laravel" style="brands" class="text-primary"/>
-            {{ config('app.name', 'Laravel') }}
+            <x-ui::icon name="laravel" style="brands" class="text-primary"/> {{ config('app.name') }}
         </a>
 
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
@@ -22,24 +21,22 @@
                 @else
                     <a href="{{ url('/home') }}" class="nav-link">{{ __('Home') }}</a>
 
+                    @if(Route::has('users'))
+                        <a href="{{ route('users') }}" class="nav-link">{{ __('Users') }}</a>
+                    @endif
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            {{ Auth::user()->name }}
+                            <x-ui::icon name="user-circle"/> {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <button type="button" class="dropdown-item"
-                                    wire:click="$emit('showModal', 'auth.profile-update')">
-                                {{ __('Update Profile') }}
-                            </button>
+                            <x-ui::dropdown-item :label="__('Update Profile')"
+                                click="$emit('showModal', 'auth.profile-update')"/>
 
-                            <button type="button" class="dropdown-item"
-                                    wire:click="$emit('showModal', 'auth.password-change')">
-                                {{ __('Change Password') }}
-                            </button>
+                            <x-ui::dropdown-item :label="__('Change Password')"
+                                click="$emit('showModal', 'auth.password-change')"/>
 
-                            <button type="button" class="dropdown-item" wire:click="logout">
-                                {{ __('Logout') }}
-                            </button>
+                            <x-ui::dropdown-item :label="__('Logout')" click="logout"/>
                         </div>
                     </div>
                 @endguest
