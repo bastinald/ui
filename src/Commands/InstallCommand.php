@@ -38,8 +38,8 @@ class InstallCommand extends Command
 
             foreach ($files as $file) {
                 $contents = str_replace(
-                    ['@fortawesome/fontawesome-free', "'font_awesome_style' => 'solid'"],
-                    ['@fortawesome/fontawesome-pro', "'font_awesome_style' => 'regular'"],
+                    ['@fortawesome/fontawesome-free', "'UI_FONT_AWESOME_STYLE', 'solid'"],
+                    ['@fortawesome/fontawesome-pro', "'UI_FONT_AWESOME_STYLE', 'regular'"],
                     $this->filesystem->get($file)
                 );
 

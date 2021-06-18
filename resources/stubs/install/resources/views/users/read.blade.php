@@ -15,14 +15,17 @@
                 <dt>{{ __('Email') }}</dt>
                 <dd>{{ $user->email }}</dd>
 
+                <dt>{{ __('Timezone') }}</dt>
+                <dd>{{ $user->timezone ?? __('Empty') }}</dd>
+
                 <dt>{{ __('Email Verified At') }}</dt>
-                <dd>{{ $user->email_verified_at ?? __('N/A') }}</dd>
+                <dd>@displayDate($user->email_verified_at)</dd>
 
                 <dt>{{ __('Created At') }}</dt>
-                <dd>{{ $user->created_at }}</dd>
+                <dd>@displayDate($user->created_at)</dd>
 
                 <dt>{{ __('Updated At') }}</dt>
-                <dd>{{ $user->updated_at }}</dd>
+                <dd>@displayDate($user->updated_at)</dd>
             </dl>
         </div>
         <div class="modal-footer">

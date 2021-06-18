@@ -36,13 +36,13 @@ class ModelCommand extends Command
     {
         $this->modelParser = new ComponentParser(
             'App\\Models',
-            resource_path('views'),
+            config('livewire.view_path'),
             $this->argument('class')
         );
 
         $this->factoryParser = new ComponentParser(
             'Database\\Factories',
-            resource_path('views'),
+            config('livewire.view_path'),
             $this->argument('class') . 'Factory'
         );
     }

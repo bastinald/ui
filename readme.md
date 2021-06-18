@@ -14,9 +14,12 @@ Laravel Livewire & Bootstrap 5 UI & CRUD starter kit. This package is a moderniz
 - Bootstrap 5 pre-configured
 - Full auth scaffolding including login, register, forgot password, profile updating, etc.
 - Commands for making models, components, and CRUD
+- PWA capabilities
+- Simply app versioning
 - Automatic model migrations
 - Automatic full page component routing
 - Automatic attribute hashing
+- Automatic user timezones
 - Easy form data manipulation via a single property
 - Dynamic Livewire Bootstrap modals
 - Custom Blade components

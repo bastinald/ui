@@ -37,7 +37,7 @@
                     <div class="col-lg mb-2 mb-lg-0">
                         <ul class="list-unstyled mb-0">
                             <li>{{ $DummyModelVariable->name }}</li>
-                            <li class="small text-muted">{{ $DummyModelVariable->created_at }}</li>
+                            <li class="small text-muted">@displayDate($DummyModelVariable->created_at)</li>
                         </ul>
                     </div>
                     <div class="col-lg-auto">

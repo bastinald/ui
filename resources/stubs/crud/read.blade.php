@@ -13,10 +13,10 @@
                 <dd>{{ $DummyModelVariable->name }}</dd>
 
                 <dt>{{ __('Created At') }}</dt>
-                <dd>{{ $DummyModelVariable->created_at }}</dd>
+                <dd>@displayDate($DummyModelVariable->created_at)</dd>
 
                 <dt>{{ __('Updated At') }}</dt>
-                <dd>{{ $DummyModelVariable->updated_at }}</dd>
+                <dd>@displayDate($DummyModelVariable->updated_at)</dd>
             </dl>
         </div>
         <div class="modal-footer">

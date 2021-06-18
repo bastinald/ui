@@ -35,7 +35,7 @@ class ComponentCommand extends Command
     {
         $this->componentParser = new ComponentParser(
             config('livewire.class_namespace'),
-            resource_path('views'),
+            config('livewire.view_path'),
             $this->argument('class')
         );
     }

@@ -24,9 +24,10 @@ class User extends Authenticatable
         $table->id();
         $table->string('name')->index();
         $table->string('email')->unique();
-        $table->timestamp('email_verified_at')->nullable()->index();
         $table->string('password');
         $table->rememberToken();
+        $table->string('timezone')->nullable();
+        $table->timestamp('email_verified_at')->nullable()->index();
         $table->timestamp('created_at')->nullable()->index();
         $table->timestamp('updated_at')->nullable();
     }
@@ -36,9 +37,10 @@ class User extends Authenticatable
         return [
             'name' => $faker->firstName,
             'email' => $faker->unique()->safeEmail,
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => Str::random(10),
+            'timezone' => $faker->timezone,
+            'email_verified_at' => $faker->dateTimeBetween(now()->subMonth(), now()),
             'created_at' => $faker->dateTimeBetween(now()->subMonth(), now()),
         ];
     }

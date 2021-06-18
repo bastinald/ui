@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a href="{{ url('/') }}" class="navbar-brand">
-            <x-ui::icon name="laravel" style="brands" class="text-primary"/> {{ config('app.name') }}
+            <img src="{{ asset('images/logo.png') }}?v={{ config('app.version') }}"
+                alt="{{ config('app.name') }}" height="24">
         </a>
 
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">

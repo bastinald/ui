@@ -8,7 +8,10 @@
     <title>@yield('title') | {{ config('app.name') }}</title>
 
     <livewire:styles/>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ config('app.version') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/icon-touch.png') }}?v={{ config('app.version') }}">
+    <link rel="icon" href="{{ asset('images/icon-fav.png') }}?v={{ config('app.version') }}">
+    <link rel="manifest" href="{{ asset('json/manifest.json') }}?v={{ config('app.version') }}">
     @stack('styles')
 </head>
 <body>
@@ -21,7 +24,7 @@
     <livewire:modal/>
 
     <livewire:scripts/>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}?v={{ config('app.version') }}"></script>
     @stack('scripts')
 </body>
 </html>

@@ -38,13 +38,13 @@ class CrudCommand extends Command
     {
         $this->componentParser = new ComponentParser(
             config('livewire.class_namespace'),
-            resource_path('views'),
+            config('livewire.view_path'),
             Str::plural($this->argument('class')) . '\\Index',
         );
 
         $this->modelParser = new ComponentParser(
             'App\\Models',
-            resource_path('views'),
+            config('livewire.view_path'),
             Str::singular(Arr::last(explode('\\', $this->componentParser->classNamespace()))),
         );
     }
