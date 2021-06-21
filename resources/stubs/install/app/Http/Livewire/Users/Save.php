@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use Bastinald\Ui\Traits\WithModel;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Save extends Component
@@ -25,18 +24,9 @@ class Save extends Component
         return view('users.save');
     }
 
-    public function rules()
-    {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user->id)],
-            'password' => [!$this->user->exists ? 'required' : 'nullable', 'confirmed'],
-        ];
-    }
-
     public function save()
     {
-        $this->validateModel();
+        $this->validateModel($this->user->rules());
 
         $this->user->fill($this->getModel(['name', 'email', 'password']))->save();
 

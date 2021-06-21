@@ -9,6 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,15 @@ class User extends Authenticatable
             'timezone' => $faker->timezone,
             'email_verified_at' => $faker->dateTimeBetween(now()->subMonth(), now()),
             'created_at' => $faker->dateTimeBetween(now()->subMonth(), now()),
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->id)],
+            'password' => [!$this->exists ? 'required' : 'nullable', 'confirmed'],
         ];
     }
 }

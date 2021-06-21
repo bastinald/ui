@@ -28,4 +28,11 @@ class DummyModelClass extends Model
             'created_at' => $faker->dateTimeBetween(now()->subMonth(), now()),
         ];
     }
+
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+        ];
+    }
 }

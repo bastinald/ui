@@ -534,6 +534,9 @@ A dropdown item button:
 Available props:
 
 - `label`: the dropdown item button label
+- `route`: the route to link to
+- `url`: the URL to link to
+- `href`: the link href
 - `click`: the Livewire click action
 
 ### Action
@@ -549,6 +552,9 @@ Available props:
 
 - `icon`: the action button icon (Font Awesome)
 - `title`: the action button title
+- `route`: the route to link to
+- `url`: the URL to link to
+- `href`: the link href
 - `click`: the Livewire click action
 
 ### Pagination

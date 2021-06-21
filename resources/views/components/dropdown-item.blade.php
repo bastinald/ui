@@ -1,17 +1,24 @@
 @props([
     'label',
-    'click',
+    'route' => null,
+    'url' => null,
+    'href' => null,
+    'click' => null,
 ])
 
 @php
+    if ($route) $href = route($route);
+    else if ($url) $href = url($url);
+
     $attributes = $attributes->class([
         'dropdown-item',
     ])->merge([
-        'type' => 'button',
+        'type' => $click ? 'button' : null,
+        'href' => $href,
         'wire:click' => $click,
     ]);
 @endphp
 
-<button {{ $attributes }}>
+<{{ $href ? 'a' : 'button' }} {{ $attributes }}>
     {{ $label }}
-</button>
+</{{ $href ? 'a' : 'button' }}>

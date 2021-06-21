@@ -24,16 +24,9 @@ class Save extends Component
         return view('DummyViewName.save');
     }
 
-    public function rules()
-    {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-        ];
-    }
-
     public function save()
     {
-        $this->validateModel();
+        $this->validateModel($this->DummyModelVariable->rules());
 
         $this->DummyModelVariable->fill($this->getModel())->save();
 
