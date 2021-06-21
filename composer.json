@@ -11,7 +11,6 @@
         }
     ],
     "require": {
-        "php": "^8.0",
         "barryvdh/laravel-ide-helper": "^2.10",
         "doctrine/dbal": "^3.0",
         "jamesmills/laravel-timezone": "^1.9",
