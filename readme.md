@@ -1,6 +1,6 @@
 # No Longer Maintained
 
-Check out my other UI, Auth, & CRUD scaffolding package here: https://github.com/bastinald/laravel-livewire-ui
+Check out my UI, Auth, & CRUD scaffolding package here: https://github.com/bastinald/laravel-livewire-ui
 
 ---
 
