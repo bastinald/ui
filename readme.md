@@ -2,8 +2,6 @@
 
 Laravel Livewire & Bootstrap 5 UI & CRUD starter kit. This package is a modernized version of the old `laravel/ui` package for developers who prefer using Bootstrap 5 and full page Livewire components to build their projects. It also comes with a few features to boost your development speed even more.
 
-<a href="https://www.youtube.com/watch?v=CYl1pMgiecU"><img src="https://i.imgur.com/jkp9nYW.png"></a>
-
 ### Requirements
 
 - Laravel 8
