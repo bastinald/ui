@@ -1,9 +1,3 @@
-# No Longer Maintained
-
-Check out my UI, Auth, & CRUD scaffolding package here: https://github.com/bastinald/laravel-livewire-ui
-
----
-
 ## bastinald/ui
 
 Laravel Livewire & Bootstrap 5 UI & CRUD starter kit. This package is a modernized version of the old `laravel/ui` package for developers who prefer using Bootstrap 5 and full page Livewire components to build their projects. It also comes with a few features to boost your development speed even more.
