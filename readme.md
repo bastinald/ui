@@ -476,7 +476,7 @@ The `options` array can be an indexed or associative array. If the array is asso
 A radio input:
 
 ```html
-<x-ui::radio :label="__('Color')" options="['Red', 'Blue']" model="color"/>
+<x-ui::radio :label="__('Color')" :options="['Red', 'Blue']" model="color"/>
 ```
 
 Available props:
