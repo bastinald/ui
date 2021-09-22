@@ -459,7 +459,7 @@ The `lazy` and `debounce` props work the same as the `input` component.
 A select input:
 
 ```html
-<x-ui::select :label="__('Color')" options="['Red', 'Blue']" model="color"/>
+<x-ui::select :label="__('Color')" :options="['Red', 'Blue']" model="color"/>
 ```
 
 Available props:
