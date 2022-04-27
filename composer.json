@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "barryvdh/laravel-ide-helper": "^2.10",
+        "barryvdh/laravel-ide-helper": "^2.12",
         "doctrine/dbal": "^3.0",
         "jamesmills/laravel-timezone": "^1.9",
         "laravel/framework": "^9.0",
