@@ -1,2 +1,2 @@
-require('@popperjs/core');
-window.bootstrap = require('bootstrap');
+import "./bootstrap";
+import "@fortawesome/fontawesome-free/js/all.min.js";
