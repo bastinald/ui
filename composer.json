@@ -11,10 +11,11 @@
         }
     ],
     "require": {
-        "barryvdh/laravel-ide-helper": "^2.10",
-        "doctrine/dbal": "^3.0",
+        "php": "^7.2.5|^8.0",
+        "barryvdh/laravel-ide-helper": "^2.12",
+        "doctrine/dbal": "^3.3.0",
         "jamesmills/laravel-timezone": "^1.9",
-        "laravel/framework": "^8.0",
+        "laravel/framework": "^8.0|^9.0",
         "livewire/livewire": "^2.0",
         "lukeraymonddowning/honey": "^0.3"
     },
